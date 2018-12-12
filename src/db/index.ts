@@ -13,7 +13,7 @@ const config: Config = {
     host: '127.0.0.1',
     port: 3311,
     user: 'root',
-    password: '3',
+    password: '1',
     database: 'wygx'
 }
 const connection = createConnection(config)

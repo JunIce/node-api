@@ -1,6 +1,6 @@
 import {Application, Response, Request, NextFunction} from 'express'
 import express from 'express'
-import HomeContoller from './controllers/homeContoller'
+import Home from './controllers/home'
 
 class App {
     app: Application
@@ -13,7 +13,7 @@ class App {
     }
 
     private router() {
-        this.app.use('/home', HomeContoller)
+        this.app.use('/home', Home)
     }
     private middleware(): void {
         this.app.use(this.responseJsonMiddleware)

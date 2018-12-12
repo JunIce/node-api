@@ -1,5 +1,5 @@
 import {Router, Request, Response} from 'express'
-import Advertise from '../models/advertiseModel'
+import Advertise from '../models/advertise'
 
 class HomeController {
     router: Router
