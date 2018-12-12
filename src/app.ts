@@ -1,27 +1,34 @@
+import {Application, Response, Request, NextFunction} from 'express'
 import express from 'express'
 import HomeContoller from './controllers/homeContoller'
-const app = express()
 
-import {Promise} from 'es6-promise';
-function foo():Promise<string> {
-    return new Promise((resolve: (str: string)=>void) => {
-        const a: string = "hello from Promise";
-        setTimeout(() => {
-            resolve(a);
-        }, 3000)
-     })
+class App {
+    app: Application
+    port: number
+    constructor() {
+        this.app = express()
+        this.port = 8082
+        this.middleware()
+        this.router()
+    }
+
+    private router() {
+        this.app.use('/home', HomeContoller)
+    }
+    private middleware(): void {
+        this.app.use(this.responseJsonMiddleware)
+    }
+
+    private responseJsonMiddleware(req: Request, res: Response, next: NextFunction): void {
+        console.log(`before`)
+        next()
+        console.log(`aft`)
+    }
+    run(): void {
+        this.app.listen(this.port, () => {
+            console.log(`express app is running at ${this.port}`)
+        })
+    }
 }
-const p: Promise<string> = foo()
-p.then((st) => {
-  console.log(st);
-});
 
-app.get('/', (req, res) => {
-    res.send('hello express')
-})
-
-app.use('/home', HomeContoller)
-
-app.listen(8082, function() {
-    console.log(`listening at 8082`)
-})
+new App().run()

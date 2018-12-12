@@ -12,7 +12,8 @@
     "gulp-babel": "^8.0.0",
     "gulp-cached": "^1.1.1",
     "gulp-print": "^5.0.0",
-    "nodemon": "^1.18.8"
+    "nodemon": "^1.18.8",
+    "response-time": "^2.3.2"
   },
   "devDependencies": {
     "gulp-typescript": "^5.0.0",
