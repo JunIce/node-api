@@ -20,7 +20,7 @@ export default class Base implements DB {
     prefix: string = 'phome_'
     tbname: string
 
-    constructor(tbname: string) {
+    constructor(tbname: string = '') {
         this.connection = createConnection(config)
         this.tbname = `${this.prefix}${tbname}`
     }
