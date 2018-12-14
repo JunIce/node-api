@@ -1,7 +1,7 @@
 import Base from '../db'
 
 export default class Name extends Base {
-    constructor() {
-        super('name')
-    }
+	constructor() {
+		super('name')
+	}
 }
