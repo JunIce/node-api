@@ -1,4 +1,4 @@
-import Base from './base'
+import Base from '../db'
 
 export default class Name extends Base {
     constructor() {

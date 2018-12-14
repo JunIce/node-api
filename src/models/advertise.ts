@@ -1,4 +1,4 @@
-import Base from './base'
+import Base from '../db'
 
 export default class Advertise extends Base {
     constructor() {

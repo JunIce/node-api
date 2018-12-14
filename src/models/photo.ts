@@ -1,4 +1,4 @@
-import Base from './base'
+import Base from '../db'
 
 export default class Photo extends Base {
     constructor() {
