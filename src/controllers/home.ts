@@ -6,17 +6,17 @@ import {
 	ErrorRequestHandler,
 	Errback
 } from 'express'
+import BaseController from './baseController'
+import { checkParams } from '../lib/toolController'
 import Advertise from '../models/advertise'
 import BaseInfo from '../models/baseInfo'
 
 interface RouterErorBack extends Errback {
 	message: string
 }
-class HomeController {
-	router: Router
-
+class HomeController extends BaseController {
 	constructor() {
-		this.router = Router()
+		super()
 		this.router.post('/home-ad', this.homeAd)
 		this.router.post('/list', this.getList)
 	}
@@ -33,16 +33,20 @@ class HomeController {
 	}
 
 	public getList(req: Request, res: Response, next: NextFunction): void {
+		checkParams(arguments, ['page', 'pageSize', 'classId'])
+
 		let { page, pageSize, classId, type } = req.body
-		if (!page || !pageSize || !classId) {
-			let err = '参数不存在'
-			return next(new Error(err))
-		}
 		let ctype = type || 0
 		let base = new BaseInfo()
-		base.getList(parseInt(classId), page, pageSize, ctype).then(data => {
-			res.status(200).json(data)
-		})
+		let data = base.getList(parseInt(classId), page, pageSize, ctype)
+
+		data
+			.then(data => {
+				res.status(200).json(data)
+			})
+			.catch(err => {
+				next(err)
+			})
 	}
 }
 
